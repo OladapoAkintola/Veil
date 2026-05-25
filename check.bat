@@ -1,0 +1,18 @@
+python -m nuitka mpfun_v2.py ^
+  --standalone ^
+  --plugin-enable=pyside6 ^
+  --include-module=uuid ^
+  --include-module=concurrent.futures ^
+  --include-module=peewee ^
+  --include-data-dir=images=images ^
+  --include-data-dir=legals=legals ^
+  --include-data-dir=vlc=vlc ^
+  --windows-icon-from-ico=images/icon.ico ^
+  --windows-console-mode=disable ^
+  --output-dir=dist ^
+  --product-name="MPFUN PRO" ^
+  --product-version=2.8.0 ^
+  --company-name="Oladapo Akintola" ^
+  --file-description="MPFUN Music Player Pro" ^
+  --lto=yes ^
+  --jobs=4
