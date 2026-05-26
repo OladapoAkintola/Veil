@@ -1,6 +1,6 @@
-from platformdirs import PlatformDirs
 from pathlib import Path
 
+from platformdirs import PlatformDirs
 
 app = PlatformDirs(
     appname="Veil",

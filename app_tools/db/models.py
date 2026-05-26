@@ -1,8 +1,8 @@
-import datetime
-import time
 import uuid
+from datetime import datetime
 
 from peewee import *
+
 from .db import db
 
 
@@ -15,8 +15,9 @@ class User(BaseModel):
     id = PrimaryKeyField(default=uuid.uuid4, unique=True)
     username = CharField(unique=True)
     password = CharField()
-    security_question = CharField()
-    security_answer = CharField()
+    security_question = CharField(null=True)
+    security_answer = CharField(null=True)
+    created_at = DateTimeField(default=datetime.now)
 
 
 class HiddenFile(BaseModel):
@@ -26,6 +27,7 @@ class HiddenFile(BaseModel):
         ('audio', 'audio'),
         ('document', 'document'),
     ]
+    user = ForeignKeyField(User)
     id = PrimaryKeyField(default=uuid.uuid4, unique=True)
     filename = CharField()
     file_extension = CharField()
@@ -33,7 +35,7 @@ class HiddenFile(BaseModel):
     file_size = IntegerField(default=0)
     path = CharField()
     original_path = CharField()
-    date_created = DateTimeField(default=datetime.datetime.now)
+    date_created = DateTimeField(default=datetime.now)
 
 
 class HiddenAudioFile(HiddenFile):
@@ -45,3 +47,6 @@ class HiddenAudioFile(HiddenFile):
     track_number = IntegerField(null=True)
 
 
+class Login(BaseModel):
+    user = ForeignKeyField(User)
+    login_time = DateTimeField(default=datetime.now)
